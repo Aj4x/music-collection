@@ -7,4 +7,10 @@ tasks:
 
   build:
     cmds:
+      - templ generate
       - go build -o out/music-collection main.go
+
+  run:
+    deps:
+      - build
+    cmd: ./out/music-collection
