@@ -10,3 +10,7 @@ Requires;
 
 - [Templ](https://templ.guide)
   - go install github.com/a-h/templ/cmd/templ@latest
+
+## Dependencies
+
+Server using [Echo](https://echo.labstack.com)
