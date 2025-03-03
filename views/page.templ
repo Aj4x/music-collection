@@ -1,10 +1,19 @@
 package views
 
 templ Page(){
-  <style type="text/css">
-    :root {
-      font-family: sans-serif;
-    }
-  </style>
-  @Hello("World")
+  <!DOCTYPE html>
+  <head>
+    <title>Title</title>
+    <link rel="stylesheet" href="static/styles/styles.css"/>
+  </head>
+  <body>
+    <div class="page-container">
+      <div class="top">Top</div>
+      <div class="content">
+        <p>Content</p>
+        @Hello("World")
+      </div>  
+      <div class="side">Side</div>
+    </div>
+  </body>
 }

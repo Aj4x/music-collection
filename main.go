@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"embed"
 	"errors"
 	"log/slog"
 	"net/http"
@@ -12,6 +13,9 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
+//go:embed static
+var static embed.FS
+
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
@@ -19,6 +23,8 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return render(c, http.StatusOK, views.Page())
 	})
+	staticHandler := http.FileServer(http.FS(static))
+	e.GET("/static/*", echo.WrapHandler(staticHandler))
 	if err := e.Start(":8080"); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		slog.Error("failed to start server", "error", err)
 	}
