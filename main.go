@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"errors"
+	"log/slog"
+	"net/http"
+
 	"github.com/Aj4x/music-collection/views"
 	"github.com/a-h/templ"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"log/slog"
-	"net/http"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.GET("/", func(c echo.Context) error {
-		return render(c, http.StatusOK, views.Hello("World"))
+		return render(c, http.StatusOK, views.Page())
 	})
 	if err := e.Start(":8080"); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		slog.Error("failed to start server", "error", err)
