@@ -1,19 +1,87 @@
 package views
 
-templ Page(){
-  <!DOCTYPE html>
-  <head>
-    <title>Title</title>
-    <link rel="stylesheet" href="static/styles/styles.css"/>
-  </head>
-  <body>
-    <div class="page-container">
-      <div class="top">Top</div>
-      <div class="content">
-        <p>Content</p>
-        @Hello("World")
-      </div>  
-      <div class="side">Side</div>
-    </div>
-  </body>
+templ Page() {
+	<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		<title>Title</title>
+		<link rel="stylesheet" href="static/styles/styles.css"/>
+		<script defer src="static/scripts/vendor/alpinejs@3.x.x_dist_min.js"></script>
+	</head>
+	<body>
+		@header("Header")
+		@nav([]link{
+			{href: "#home", name: "Home"},
+			{href: "#about", name: "About"},
+			{href: "#music", name: "Music"},
+		})
+		<main>
+			@article("Article 1", []string{"Section 1", "Section 2", "Section 3"})
+			@article("Article 2", []string{"Section 1", "Section 2"})
+			@article("Article 3", []string{"Section 1"})
+			@sidebar("Menu",[]link{
+				{href: "#1", name: "Page 1"},			
+				{href: "#2", name: "Page 2"},			
+				{href: "#3", name: "Page 3"},			
+				{href: "#4", name: "Page 4"},			
+				{href: "#5", name: "Page 5"},			
+			})
+		</main>
+		<footer>
+			<p>Footer</p>
+		</footer>
+	</body>
+}
+
+templ header(name string) {
+	<header>
+		<h1>{ name }</h1>
+	</header>
+}
+
+type link struct {
+	href string
+	name string
+}
+
+templ nav(links []link) {
+	<nav>
+		<ul>
+			for _, l := range links {
+				<li><a href={templ.URL(l.href)}>{ l.name }</a></li>
+			}
+		</ul>
+		<form>
+			<input type="search" name="q" placeholder="Search query"/>
+			<input type="submit" value="Go!"/>
+		</form>
+	</nav>
+}
+
+templ article(name string, sections []string) {
+	<article>
+		<h2>{ name }</h2>
+		for _, section := range sections {
+			<section>
+				<h3>{ section }</h3>
+				<p>
+					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff
+					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff
+					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff
+				</p>
+			</section>
+		}
+	</article>
+}
+
+templ sidebar(header string, links []link) {
+	<aside>
+		<h2>{header}</h2>
+		<ul>
+			for _, l := range links {
+				<li><a href={templ.URL(l.href)}>{ l.name }</a></li>
+			}
+		</ul>
+	</aside>
 }
