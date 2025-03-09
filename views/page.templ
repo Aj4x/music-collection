@@ -16,10 +16,16 @@ templ Page() {
 			{href: "#about", name: "About"},
 			{href: "#music", name: "Music"},
 		})
-		<main>
+		<main class="main">
 			@article("Article 1", []string{"Section 1", "Section 2", "Section 3"})
 			@article("Article 2", []string{"Section 1", "Section 2"})
 			@article("Article 3", []string{"Section 1"})
+			@article("Article 4", []string{"Section 1", "Section 2", "Section 3"})
+			@article("Article 5", []string{"Section 1", "Section 2"})
+			@article("Article 6", []string{"Section 1"})
+			@article("Article 7", []string{"Section 1", "Section 2", "Section 3"})
+			@article("Article 8", []string{"Section 1", "Section 2"})
+			@article("Article 9", []string{"Section 1"})
 			@sidebar("Menu",[]link{
 				{href: "#1", name: "Page 1"},			
 				{href: "#2", name: "Page 2"},			
@@ -35,7 +41,7 @@ templ Page() {
 }
 
 templ header(name string) {
-	<header>
+	<header class="header">
 		<h1>{ name }</h1>
 	</header>
 }
@@ -46,8 +52,8 @@ type link struct {
 }
 
 templ nav(links []link) {
-	<nav>
-		<ul>
+	<nav class="nav">
+		<ul class="horizontal-list">
 			for _, l := range links {
 				<li><a href={templ.URL(l.href)}>{ l.name }</a></li>
 			}
@@ -60,15 +66,15 @@ templ nav(links []link) {
 }
 
 templ article(name string, sections []string) {
-	<article>
+	<article class="article">
 		<h2>{ name }</h2>
 		for _, section := range sections {
 			<section>
 				<h3>{ section }</h3>
 				<p>
-					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff
-					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff
-					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff
+					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
+					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
+					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
 				</p>
 			</section>
 		}
@@ -76,7 +82,7 @@ templ article(name string, sections []string) {
 }
 
 templ sidebar(header string, links []link) {
-	<aside>
+	<aside class="menu">
 		<h2>{header}</h2>
 		<ul>
 			for _, l := range links {
