@@ -69,7 +69,7 @@ templ nav(links []link) {
 templ article(name string, sections []string) {
 	<article class="article" x-data="{ open: false }">
 		<h2 @click="open = !open">{ name }</h2>
-		<div x-show="open">
+		<div x-cloak x-show="open" x-transition.duration.300ms>
 			<hr/>
 			for _, section := range sections {
 				<section>
