@@ -16,6 +16,7 @@ templ Page() {
 			{href: "#about", name: "About"},
 			{href: "#music", name: "Music"},
 		})
+		<br/>
 		<main class="main">
 			@article("Article 1", []string{"Section 1", "Section 2", "Section 3"})
 			@article("Article 2", []string{"Section 1", "Section 2"})
@@ -66,18 +67,21 @@ templ nav(links []link) {
 }
 
 templ article(name string, sections []string) {
-	<article class="article">
-		<h2>{ name }</h2>
-		for _, section := range sections {
-			<section>
-				<h3>{ section }</h3>
-				<p>
-					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
-					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
-					stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
-				</p>
-			</section>
-		}
+	<article class="article" x-data="{ open: false }">
+		<h2 @click="open = !open">{ name }</h2>
+		<div x-show="open">
+			<hr/>
+			for _, section := range sections {
+				<section>
+					<h3>{ section }</h3>
+					<p>
+						stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
+						stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
+						stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
+					</p>
+				</section>
+			}
+		</div>
 	</article>
 }
 
