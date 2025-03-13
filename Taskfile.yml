@@ -5,12 +5,26 @@ tasks:
   default:
     cmd: task --list-all
 
+  generate:
+    cmd: templ generate
+
+  clean:
+    cmd: if [ -d ./out ]; then rm -r ./out; fi
+
   build:
-    cmds:
-      - templ generate
-      - go build -o out/music-collection main.go
+    deps:
+      - clean
+      - generate
+    cmd: go build -o out/music-collection main.go
 
   run:
     deps:
       - build
-    cmd: ./out/music-collection
+    cmds:
+      - defer: { task: clean }
+      - ./out/music-collection
+
+  dev:
+    cmds:
+      - defer: { task: clean }
+      - air
