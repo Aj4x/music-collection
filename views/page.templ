@@ -8,8 +8,10 @@ templ Page() {
 		<title>Title</title>
 		<link rel="stylesheet" href="static/styles/styles.css"/>
 		<script defer src="static/scripts/vendor/alpinejs@3.x.x_dist_min.js"></script>
+		<!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 	</head>
-	<body>
+	<body x-data="{ sidebarOpen: true }">
 		@header("Header")
 		@nav([]link{
 			{href: "#home", name: "Home"},
@@ -17,7 +19,7 @@ templ Page() {
 			{href: "#music", name: "Music"},
 		})
 		<br/>
-		<main class="main">
+		<main class="main" :class="{ 'sidebar-hidden': !sidebarOpen }">
 			@article("Article 1", []string{"Section 1", "Section 2", "Section 3"})
 			@article("Article 2", []string{"Section 1", "Section 2"})
 			@article("Article 3", []string{"Section 1"})
@@ -27,12 +29,12 @@ templ Page() {
 			@article("Article 7", []string{"Section 1", "Section 2", "Section 3"})
 			@article("Article 8", []string{"Section 1", "Section 2"})
 			@article("Article 9", []string{"Section 1"})
-			@sidebar("Menu",[]link{
-				{href: "#1", name: "Page 1"},			
-				{href: "#2", name: "Page 2"},			
-				{href: "#3", name: "Page 3"},			
-				{href: "#4", name: "Page 4"},			
-				{href: "#5", name: "Page 5"},			
+			@sidebar("Menu", []menuItem{
+				{href: "#home", name: "Home", icon: "fa-home"},
+				{href: "#music", name: "Music", icon: "fa-music"},
+				{href: "#list", name: "List", icon: "fa-list"},
+				{href: "#settings", name: "Settings", icon: "fa-cog"},
+				{href: "#account", name: "Account", icon: "fa-user"},
 			})
 		</main>
 		<footer>
@@ -43,7 +45,15 @@ templ Page() {
 
 templ header(name string) {
 	<header class="header">
-		<h1>{ name }</h1>
+	    <div class="header-content">
+	        <button class="sidebar-toggle"
+	            @click="sidebarOpen = !sidebarOpen"
+	            aria-label="Toggle sidebar">
+	            <span :class="{ 'sidebar-open': sidebarOpen }">&#x2630;</span>
+	            <!-- ≡ -->
+            </button>
+            <h1>{ name }</h1>
+	    </div>
 	</header>
 }
 
@@ -52,8 +62,14 @@ type link struct {
 	name string
 }
 
+type menuItem struct {
+	href string
+	name string
+	icon string
+}
+
 templ nav(links []link) {
-	<nav class="nav">
+	<nav class="nav" :class="{ 'sidebar-hidden': !sidebarOpen }">
 		<ul class="horizontal-list">
 			for _, l := range links {
 				<li><a href={templ.URL(l.href)}>{ l.name }</a></li>
@@ -85,12 +101,16 @@ templ article(name string, sections []string) {
 	</article>
 }
 
-templ sidebar(header string, links []link) {
-	<aside class="menu">
-		<h2>{header}</h2>
-		<ul>
-			for _, l := range links {
-				<li><a href={templ.URL(l.href)}>{ l.name }</a></li>
+templ sidebar(header string, items []menuItem) {
+	<aside class="sidebar" :class="{ 'collapsed': !sidebarOpen }">
+		<ul class="sidebar-menu">
+			for _, item := range items {
+				<li class="sidebar-item">
+				    <a href={templ.URL(item.href)} title={item.name}>
+				        <i class={"fas " + item.icon}></i>
+				        <span class="sidebar-text">{ item.name }</span>
+				    </a>
+				</li>
 			}
 		</ul>
 	</aside>
