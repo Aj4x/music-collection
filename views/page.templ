@@ -7,11 +7,14 @@ templ Page() {
 		<meta name="viewport" content="width=device-width"/>
 		<title>Title</title>
 		<link rel="stylesheet" href="static/styles/styles.css"/>
+		<!-- Alpine Plugins -->
+        <script defer src="static/scripts/vendor/alpinejs_persist@3.x.x_dist.js"></script>
+        <!-- Alpine JS Core -->
 		<script defer src="static/scripts/vendor/alpinejs@3.x.x_dist_min.js"></script>
 		<!-- Font Awesome for icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 	</head>
-	<body x-data="{ sidebarOpen: true }">
+	<body x-data="{ sidebarOpen: $persist(false) }" x-cloak>
 		@header("Header")
 		@nav([]link{
 			{href: "#home", name: "Home"},
