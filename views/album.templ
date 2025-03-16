@@ -1,0 +1,116 @@
+package views
+
+import (
+	"fmt"
+	"github.com/Aj4x/music-collection/models"
+)
+
+// AlbumGrid displays a responsive grid of album covers
+templ AlbumGrid(albums []models.Album) {
+	<div class="album-grid">
+		for _, album := range albums {
+			@AlbumCard(album)
+		}
+	</div>
+}
+
+// AlbumCard displays a single album card with cover art and basic info
+templ AlbumCard(album models.Album) {
+	<article class="album-card" x-data="{ showModal: false }" :class="{ 'modal-open': showModal }">
+		<div class="album-cover" @click="showModal = true">
+			if album.CoverURL != "" {
+				<img src={ album.CoverURL } alt={ fmt.Sprintf("%s by %s", album.Title, album.Artist) }/>
+			} else {
+				<div class="placeholder-cover">
+					<i class="fas fa-music"></i>
+				</div>
+			}
+		</div>
+		<div class="album-info">
+			<h3 class="album-title">{ album.Title }</h3>
+			<p class="album-artist card">{ album.Artist }</p>
+		</div>
+		<!-- Album Details Modal -->
+		<div
+			class="album-modal-overlay"
+			x-show="showModal"
+			x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+			@click="showModal = false"
+			x-trap.noscroll="showModal"
+		>
+			<div
+				class="album-modal"
+				@click.stop
+                x-transition:enter="transition modal-enter"
+                x-transition:enter-start="opacity-0 modal-enter-start"
+                x-transition:enter-end="opacity-100 modal-enter-end"
+                x-transition:leave="transition modal-leave"
+                x-transition:leave-start="opacity-100 modal-leave-start"
+                x-transition:leave-end="opacity-0 modal-leave-end"
+			>
+				<div class="album-modal-header">
+					<h2>{ album.Title }</h2>
+					<button class="modal-close" @click="showModal = false">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+				<div class="album-modal-content">
+					<div class="album-modal-cover">
+						if album.CoverURL != "" {
+							<img src={ album.CoverURL } alt={ fmt.Sprintf("%s by %s", album.Title, album.Artist) }/>
+						} else {
+							<div class="placeholder-cover">
+								<i class="fas fa-music"></i>
+							</div>
+						}
+					</div>
+					<div class="album-details">
+						<p class="album-artist">
+							<strong>Artist:</strong> { album.Artist }
+						</p>
+						<p class="album-year">
+							<strong>Released:</strong> { fmt.Sprint(album.ReleaseYear) }
+						</p>
+						<p class="album-genre">
+							<strong>Genre:</strong> { album.Genre }
+						</p>
+						<div class="album-description">
+							<h4>About this album</h4>
+							<p>{ album.Description }</p>
+						</div>
+					</div>
+					<div class="album-tracklist">
+						<h3>Tracks</h3>
+						if len(album.Tracks) > 0 {
+							<table class="tracks-table">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Title</th>
+										<th>Duration</th>
+									</tr>
+								</thead>
+								<tbody>
+									for _, track := range album.Tracks {
+										<tr>
+											<td class="track-number">{ fmt.Sprint(track.Number) }</td>
+											<td class="track-title">{ track.Title }</td>
+											<td class="track-duration">{ track.Duration }</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						} else {
+							<p class="no-tracks">No track information available</p>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
+}

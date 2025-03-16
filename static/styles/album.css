@@ -1,0 +1,281 @@
+:root {
+    --modal-color: #292323;
+    --album-color: #f0f0f0;
+    --light-text: #f0f0f0;
+    --dark-text: #292323;
+}
+
+/* Album Grid Layout */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Album Card Styling */
+.album-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--album-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.album-card:hover:not(.modal-open) {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.album-card:hover:not(.modal-open) .album-cover img {
+    transform: scale(1.05);
+}
+
+.album-cover {
+    position: relative;
+    aspect-ratio: 1;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.placeholder-cover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    color: #aaa;
+    font-size: 3rem;
+}
+
+.album-info {
+    padding: 1rem;
+}
+
+.album-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-artist {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--light-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.album-artist.card {
+    color: var(--dark-text);
+}
+
+/* Modal Styling */
+.album-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.album-modal {
+    background-color: var(--modal-color);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
+
+.album-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.album-modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: var(--light-text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.modal-close:hover {
+    color: #000;
+}
+
+.album-modal-content {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .album-modal-content {
+        grid-template-columns: 250px minmax(0, 1fr);
+    }
+
+    .album-tracklist {
+        grid-column: 1 / -1;
+    }
+}
+
+.album-modal-cover {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.album-modal-cover img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.album-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.album-details p {
+    margin: 0;
+}
+
+.album-description {
+    margin-top: 1rem;
+}
+
+.album-description h4 {
+    margin: 0 0 0.5rem 0;
+}
+
+.album-tracklist {
+    margin-top: 1rem;
+}
+
+.tracks-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tracks-table th {
+    text-align: left;
+    padding: 0.5rem;
+    border-bottom: 2px solid #eee;
+    font-weight: 600;
+}
+
+.tracks-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.track-number {
+    width: 40px;
+    text-align: center;
+    color: var(--light-text);
+}
+
+.track-duration {
+    width: 80px;
+    text-align: right;
+    color: var(--light-text)
+}
+
+.no-tracks {
+    color: var(--light-text);
+    font-style: italic;
+}
+
+/* Modal animations */
+.modal-enter {
+    transition: all 0.3s ease-out;
+}
+
+.modal-enter-start {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+.modal-enter-end {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-leave {
+    transition: all 0.2s ease-in;
+}
+
+.modal-leave-start {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-leave-end {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+.transition {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.duration-200 {
+    transition-duration: 200ms;
+}
+
+.duration-300 {
+    transition-duration: 300ms;
+}
+
+.ease-in {
+    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.ease-out {
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-100 {
+    opacity: 1;
+}

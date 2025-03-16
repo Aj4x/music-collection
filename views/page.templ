@@ -1,5 +1,9 @@
 package views
 
+import(
+    "github.com/Aj4x/music-collection/data"
+)
+
 templ Page() {
 	<!DOCTYPE html>
 	<head>
@@ -7,31 +11,20 @@ templ Page() {
 		<meta name="viewport" content="width=device-width"/>
 		<title>Title</title>
 		<link rel="stylesheet" href="static/styles/styles.css"/>
+		<link rel="stylesheet" href="static/styles/album.css"/>
 		<!-- Alpine Plugins -->
-        <script defer src="static/scripts/vendor/alpinejs_persist@3.x.x_dist.js"></script>
-        <!-- Alpine JS Core -->
+		<script defer src="static/scripts/vendor/alpinejs_persist@3.x.x_dist.js"></script>
+		<!-- Alpine JS Core -->
 		<script defer src="static/scripts/vendor/alpinejs@3.x.x_dist_min.js"></script>
 		<!-- Font Awesome for icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 	</head>
 	<body x-data="{ sidebarOpen: $persist(false) }" x-cloak>
-		@header("Header")
-		@nav([]link{
-			{href: "#home", name: "Home"},
-			{href: "#about", name: "About"},
-			{href: "#music", name: "Music"},
-		})
+		@header("Music Collection")
+		@search()
 		<br/>
 		<main class="main" :class="{ 'sidebar-hidden': !sidebarOpen }">
-			@article("Article 1", []string{"Section 1", "Section 2", "Section 3"})
-			@article("Article 2", []string{"Section 1", "Section 2"})
-			@article("Article 3", []string{"Section 1"})
-			@article("Article 4", []string{"Section 1", "Section 2", "Section 3"})
-			@article("Article 5", []string{"Section 1", "Section 2"})
-			@article("Article 6", []string{"Section 1"})
-			@article("Article 7", []string{"Section 1", "Section 2", "Section 3"})
-			@article("Article 8", []string{"Section 1", "Section 2"})
-			@article("Article 9", []string{"Section 1"})
+			@AlbumGrid(data.Albums())
 			@sidebar("Menu", []menuItem{
 				{href: "#home", name: "Home", icon: "fa-home"},
 				{href: "#music", name: "Music", icon: "fa-music"},
@@ -40,29 +33,25 @@ templ Page() {
 				{href: "#account", name: "Account", icon: "fa-user"},
 			})
 		</main>
-		<footer>
-			<p>Footer</p>
-		</footer>
+		@footer()
 	</body>
 }
 
 templ header(name string) {
 	<header class="header">
-	    <div class="header-content">
-	        <button class="sidebar-toggle"
-	            @click="sidebarOpen = !sidebarOpen"
-	            aria-label="Toggle sidebar">
-	            <span :class="{ 'sidebar-open': sidebarOpen }">&#x2630;</span>
-	            <!-- ≡ -->
-            </button>
-            <h1>{ name }</h1>
-	    </div>
+		<div class="header-content">
+			<button
+				class="sidebar-toggle"
+				:class="{ 'sidebar-open': sidebarOpen }"
+				@click="sidebarOpen = !sidebarOpen"
+				aria-label="Toggle sidebar"
+			>
+				<!--<span :class="{ 'sidebar-open': sidebarOpen }">&#x2630;</span>-->
+				<i class="fas fa-bars"></i>
+			</button>
+			<h1>{ name }</h1>
+		</div>
 	</header>
-}
-
-type link struct {
-	href string
-	name string
 }
 
 type menuItem struct {
@@ -71,13 +60,8 @@ type menuItem struct {
 	icon string
 }
 
-templ nav(links []link) {
+templ search() {
 	<nav class="nav" :class="{ 'sidebar-hidden': !sidebarOpen }">
-		<ul class="horizontal-list">
-			for _, l := range links {
-				<li><a href={templ.URL(l.href)}>{ l.name }</a></li>
-			}
-		</ul>
 		<form>
 			<input type="search" name="q" placeholder="Search query"/>
 			<input type="submit" value="Go!"/>
@@ -85,36 +69,48 @@ templ nav(links []link) {
 	</nav>
 }
 
-templ article(name string, sections []string) {
-	<article class="article" x-data="{ open: false }">
-		<h2 @click="open = !open">{ name }</h2>
-		<div x-cloak x-show="open" x-transition.duration.300ms>
-			<hr/>
-			for _, section := range sections {
-				<section>
-					<h3>{ section }</h3>
-					<p>
-						stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
-						stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
-						stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff<br/>
-					</p>
-				</section>
-			}
-		</div>
-	</article>
-}
-
 templ sidebar(header string, items []menuItem) {
 	<aside class="sidebar" :class="{ 'collapsed': !sidebarOpen }">
 		<ul class="sidebar-menu">
 			for _, item := range items {
 				<li class="sidebar-item">
-				    <a href={templ.URL(item.href)} title={item.name}>
-				        <i class={"fas " + item.icon}></i>
-				        <span class="sidebar-text">{ item.name }</span>
-				    </a>
+					<a href={ templ.URL(item.href) } title={ item.name }>
+						<i class={ "fas " + item.icon }></i>
+						<span class="sidebar-text">{ item.name }</span>
+					</a>
 				</li>
 			}
 		</ul>
 	</aside>
+}
+
+templ footer() {
+	<footer class="footer" :class="{ 'sidebar-hidden': !sidebarOpen }">
+		<div class="footer-content">
+			<p>
+				© 2025 Aj4x
+				<a
+					href="https://github.com/Aj4x/music-collection"
+					class="github-link"
+					title="View on GitHub"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<i class="fab fa-github"></i>
+					<span>View on GitHub</span>
+				</a>. <br/><br/>
+				Powered by
+				<a
+					href="https://alpinejs.dev"
+					target="_blank"
+					rel="noopener noreferrer"
+				>Alpine.js</a> and
+				<a
+					href="https://templ.guide"
+					target="_blank"
+					rel="noopener noreferrer"
+				>Templ</a>
+			</p>
+		</div>
+	</footer>
 }

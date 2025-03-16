@@ -4,6 +4,10 @@
 	--menu-width: 200px;
 	--menu-icon-width: 50px;
 	--sidebar-transition: all 0.3s ease;
+	--bg-color: #221e1e;
+	--hover-color: #402d2d;
+	--light-text: #f0f0f0;
+	--dark-text: #292323;
 }
 
 html,
@@ -12,15 +16,11 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	background-color: var(--bg-color);
 }
 
 [x-cloak] {
 	display: none !important;
-}
-
-.page {
-	width: 100%;
-	height: 100%;
 }
 
 .main {
@@ -41,8 +41,9 @@ body {
 	left: 0;
 	width: 100%;
 	height: var(--header-height);
-	background-color: darkblue;
-	border: 1px solid darkslategray;
+	color: var(--light-text);
+	background-color: var(--bg-color);
+	opacity: 0.9;
 	text-align: center;
 	z-index: 10;
 }
@@ -57,7 +58,7 @@ body {
 .sidebar-toggle {
 	background-color: transparent;
 	border: none;
-	color: white;
+	color: var(--light-text);
 	font-size: 24px;
 	cursor: pointer;
 	padding: 5px 10px;
@@ -65,13 +66,17 @@ body {
 	transition: transform 0.3s ease;
 }
 
-.sidebar-toggle .sidebar-open {
-	transform: rotate(0deg);
+.sidebar-toggle.sidebar-open {
+	transform: rotate(90deg);
 	display: inline-block;
 }
 
 .sidebar-toggle:not(.sidebar-open) {
-	transform: rotate(90deg);
+	transform: rotate(0deg);
+}
+
+.sidebar-toggle:hover {
+	background-color: var(--hover-color);
 }
 
 .sidebar {
@@ -80,8 +85,6 @@ body {
 	left: 0;
 	width: var(--menu-width);
 	height: calc(100vh - var(--header-height));
-	background-color: darkslateblue;
-	border: 1px solid darkslategrey;
 	transition: var(--sidebar-transition);
 	z-index: 5;
 	overflow-x: hidden;
@@ -93,7 +96,7 @@ body {
 
 .sidebar-header {
 	padding: 15px;
-	color: white;
+	color: var(--light-text);
 	text-align: center;
 	margin: 0;
 	overflow: hidden;
@@ -101,7 +104,7 @@ body {
 	white-space: nowrap;
 }
 
-.sidebar.collapsed .sidebar-header {
+.sidebar.collapsed.sidebar-header {
 	font-size: 0;
 	padding: 0;
 	height: 0;
@@ -122,13 +125,13 @@ body {
 	display: flex;
 	align-items: center;
 	padding: 12px 15px;
-	color: white;
+	color: var(--light-text);
 	text-decoration: none;
 	transition: background-color 0.3s ease;
 }
 
 .sidebar-item a:hover {
-	background-color: rgba(255, 255, 255, 0.1)
+	background-color: var(--hover-color);
 }
 
 .sidebar-item i {
@@ -153,9 +156,6 @@ body {
 .article {
 	position: relative;
 	left: 1em;
-	background-color: black;
-	color: darkgray;
-	border: 1px solid darkslategrey;
 	transition: var(--sidebar-transition);
 }
 
@@ -173,7 +173,7 @@ body {
 
 ul.horizontal-list {
 	list-style: none;
-	color: white;
+	color: var(--light-text);
 	display: inline-block;
 	padding: 0.5rem 0.5rem;
 }
@@ -191,19 +191,42 @@ ul.horizontal-list li {
 	cursor: pointer;
 }
 
-footer {
-	position: fixed;
-	width: 100%;
-	height: 2em;
-	background-color: darkslateblue;
-	color: white;
-	padding: 0.5em;
-	left: 0;
-	bottom: 0;
+.footer {
+	position: relative;
+	top: var(--header-height);
+	margin-left: var(--menu-width);
 	transition: var(--sidebar-transition);
-	text-align: right;
+	padding: 0.5em;
+	color: var(--light-text);
 }
 
-footer p {
-	margin-right: 1em;
+.footer.sidebar-hidden {
+	margin-left: var(--menu-icon-width);
 }
+
+.footer-content {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	transition: color 0.2s ease;
+	font-weight: 500;
+}
+
+.github-link:hover {
+	color: #0366d6;
+}
+
+.github-link i {
+	font-size: 1.5rem;
+	margin-right: 8px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+	.footer-content {
+		flex-direction: column;
+		gap: 10px;
+		text-align: center;
+	}
+}
+
