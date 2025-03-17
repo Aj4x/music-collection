@@ -131,6 +131,13 @@ body {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	height: calc(81vh - var(--header-height));
+}
+
+.sidebar-menu li:last-child {
+	display: flex;
+	align-items: flex-end;
+	height: 100%;
 }
 
 .sidebar-item {
