@@ -1,8 +1,6 @@
 package views
 
-import(
-    "github.com/Aj4x/music-collection/data"
-)
+import "github.com/Aj4x/music-collection/data"
 
 templ Page() {
 	<!DOCTYPE html>
@@ -20,13 +18,13 @@ templ Page() {
 		<!-- Font Awesome for icons -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 	</head>
-	<body x-data="{ sidebarOpen: $persist(false) }" x-cloak>
+	<body x-data="{ sidebarOpen: $persist(false), theme: $persist('light') }" :class="theme" x-cloak>
 		@header("Music Collection")
 		@search()
 		<br/>
 		<main class="main" :class="{ 'sidebar-hidden': !sidebarOpen }">
 			@AlbumGrid(data.Albums())
-			@sidebar("Menu", []menuItem{
+			@sidebar([]menuItem{
 				{href: "#home", name: "Home", icon: "fa-home"},
 				{href: "#music", name: "Music", icon: "fa-music"},
 				{href: "#list", name: "List", icon: "fa-list"},
@@ -51,14 +49,16 @@ templ header(name string) {
 				<i class="fas fa-bars"></i>
 			</button>
 			<h1>{ name }</h1>
+			<button
+				class="theme-toggle"
+				@click="theme = theme === 'light' ? 'dark' : 'light'"
+				aria-label="Toggle theme"
+				title="Toggle theme"
+			>
+				<i class="fas" :class="theme === 'light' ? 'fa-moon' : 'fa-sun'"></i>
+			</button>
 		</div>
 	</header>
-}
-
-type menuItem struct {
-	href string
-	name string
-	icon string
 }
 
 templ search() {
@@ -70,7 +70,13 @@ templ search() {
 	</nav>
 }
 
-templ sidebar(header string, items []menuItem) {
+type menuItem struct {
+	href string
+	name string
+	icon string
+}
+
+templ sidebar(items []menuItem) {
 	<aside class="sidebar" :class="{ 'collapsed': !sidebarOpen }">
 		<ul class="sidebar-menu">
 			for _, item := range items {
@@ -99,7 +105,9 @@ templ footer() {
 				>
 					<i class="fab fa-github"></i>
 					<span>View on GitHub</span>
-				</a>. <br/><br/>
+				</a>. 
+				<br/>
+				<br/>
 				Powered by
 				<a
 					href="https://alpinejs.dev"

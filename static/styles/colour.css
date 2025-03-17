@@ -1,13 +1,21 @@
 :root {
-    --modal-color: #292323;
-    --album-color: #f0f0f0;
-    --bg-color: #221e1e;
-    --hover-color: #402d2d;
-    --link-hover-color: #0366d6;
-    --light-text: #f0f0f0;
-    --dark-text: #292323;
+    color-scheme: light dark;
 }
 
-html {
-    color-scheme: light dark;
+body {
+    --modal-color: light-dark(#cdcdcd, #292323);
+    --album-color: light-dark(#292323, #f0f0f0);
+    --bg-color: light-dark(#f0f0f0, #221e1e);
+    --hover-color: light-dark(#a39d9d, #5c5959);
+    --link-hover-color: #0366d6;
+    --light-text: light-dark(#292323, #f0f0f0);
+    --dark-text: light-dark(#f0f0f0, #292323);
+}
+
+body.light {
+    color-scheme: light;
+}
+
+body.dark {
+    color-scheme: dark;
 }

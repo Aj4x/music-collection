@@ -43,6 +43,7 @@ body {
 	opacity: 0.9;
 	text-align: center;
 	z-index: 10;
+	background-color: var(--bg-color);
 }
 
 .header-content {
@@ -72,6 +73,27 @@ body {
 }
 
 .sidebar-toggle:hover {
+	background-color: var(--hover-color);
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+	margin-left: auto;
+	background: none;
+	border: none;
+	color: inherit;
+	font-size: 1.2rem;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
 	background-color: var(--hover-color);
 }
 
@@ -122,6 +144,7 @@ body {
 	padding: 12px 15px;
 	text-decoration: none;
 	transition: background-color 0.3s ease;
+	color: var(--light-text);
 }
 
 .sidebar-item a:hover {
@@ -133,6 +156,7 @@ body {
 	font-size: 18px;
 	text-align: center;
 	transition: opacity 0.2s ease;
+	color: var(--light-text);
 }
 
 .sidebar-text {

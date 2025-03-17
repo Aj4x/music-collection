@@ -8,9 +8,7 @@ package views
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import (
-	"github.com/Aj4x/music-collection/data"
-)
+import "github.com/Aj4x/music-collection/data"
 
 func Page() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -33,7 +31,7 @@ func Page() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width\"><title>Title</title><link rel=\"stylesheet\" href=\"static/styles/styles.css\"><link rel=\"stylesheet\" href=\"static/styles/album.css\"><!-- Alpine Plugins --><script defer src=\"static/scripts/vendor/alpinejs_persist@3.x.x_dist.js\"></script><script defer src=\"static/scripts/vendor/alpinejs_focus@3.x.x_dist.js\"></script><!-- Alpine JS Core --><script defer src=\"static/scripts/vendor/alpinejs@3.x.x_dist_min.js\"></script><!-- Font Awesome for icons --><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\"></head><body x-data=\"{ sidebarOpen: $persist(false) }\" x-cloak>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width\"><title>Title</title><link rel=\"stylesheet\" href=\"static/styles/styles.css\"><link rel=\"stylesheet\" href=\"static/styles/album.css\"><!-- Alpine Plugins --><script defer src=\"static/scripts/vendor/alpinejs_persist@3.x.x_dist.js\"></script><script defer src=\"static/scripts/vendor/alpinejs_focus@3.x.x_dist.js\"></script><!-- Alpine JS Core --><script defer src=\"static/scripts/vendor/alpinejs@3.x.x_dist_min.js\"></script><!-- Font Awesome for icons --><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\"></head><body x-data=\"{ sidebarOpen: $persist(false), theme: $persist(&#39;light&#39;) }\" :class=\"theme\" x-cloak>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -53,7 +51,7 @@ func Page() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = sidebar("Menu", []menuItem{
+		templ_7745c5c3_Err = sidebar([]menuItem{
 			{href: "#home", name: "Home", icon: "fa-home"},
 			{href: "#music", name: "Music", icon: "fa-music"},
 			{href: "#list", name: "List", icon: "fa-list"},
@@ -107,24 +105,18 @@ func header(name string) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 53, Col: 13}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 51, Col: 13}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</h1></div></header>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</h1><button class=\"theme-toggle\" @click=\"theme = theme === &#39;light&#39; ? &#39;dark&#39; : &#39;light&#39;\" aria-label=\"Toggle theme\" title=\"Toggle theme\"><i class=\"fas\" :class=\"theme === &#39;light&#39; ? &#39;fa-moon&#39; : &#39;fa-sun&#39;\"></i></button></div></header>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		return nil
 	})
-}
-
-type menuItem struct {
-	href string
-	name string
-	icon string
 }
 
 func search() templ.Component {
@@ -156,7 +148,13 @@ func search() templ.Component {
 	})
 }
 
-func sidebar(header string, items []menuItem) templ.Component {
+type menuItem struct {
+	href string
+	name string
+	icon string
+}
+
+func sidebar(items []menuItem) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -198,7 +196,7 @@ func sidebar(header string, items []menuItem) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(item.name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 78, Col: 55}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 84, Col: 55}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -233,7 +231,7 @@ func sidebar(header string, items []menuItem) templ.Component {
 			var templ_7745c5c3_Var10 string
 			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(item.name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 80, Col: 44}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 86, Col: 44}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
