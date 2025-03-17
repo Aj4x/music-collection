@@ -1,9 +1,4 @@
-:root {
-    --modal-color: #292323;
-    --album-color: #f0f0f0;
-    --light-text: #f0f0f0;
-    --dark-text: #292323;
-}
+@import url('colour.css');
 
 /* Album Grid Layout */
 .album-grid {
@@ -27,10 +22,16 @@
 .album-card:hover:not(.modal-open) {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--light-text);
 }
 
 .album-card:hover:not(.modal-open) .album-cover img {
     transform: scale(1.05);
+}
+
+.album-card:hover .album-info {
+    background-color: var(--hover-color);
+    color: var(--light-text);
 }
 
 .album-cover {
@@ -61,6 +62,9 @@
 
 .album-info {
     padding: 1rem;
+    color: var(--dark-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .album-title {
@@ -68,21 +72,12 @@
     font-size: 1rem;
     font-weight: 600;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .album-artist {
     margin: 0;
     font-size: 0.9rem;
-    color: var(--light-text);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.album-artist.card {
-    color: var(--dark-text);
 }
 
 /* Modal Styling */
@@ -104,6 +99,7 @@
     background-color: var(--modal-color);
     border-radius: 8px;
     width: 100%;
+    color: var(--light-text);
     max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
@@ -133,7 +129,7 @@
 }
 
 .modal-close:hover {
-    color: #000;
+    background-color: var(--hover-color);
 }
 
 .album-modal-content {
@@ -208,74 +204,13 @@
 .track-number {
     width: 40px;
     text-align: center;
-    color: var(--light-text);
 }
 
 .track-duration {
     width: 80px;
     text-align: right;
-    color: var(--light-text)
 }
 
 .no-tracks {
-    color: var(--light-text);
     font-style: italic;
-}
-
-/* Modal animations */
-.modal-enter {
-    transition: all 0.3s ease-out;
-}
-
-.modal-enter-start {
-    transform: scale(0.9);
-    opacity: 0;
-}
-
-.modal-enter-end {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.modal-leave {
-    transition: all 0.2s ease-in;
-}
-
-.modal-leave-start {
-    transform: scale(1);
-    opacity: 1;
-}
-
-.modal-leave-end {
-    transform: scale(0.9);
-    opacity: 0;
-}
-
-.transition {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.duration-200 {
-    transition-duration: 200ms;
-}
-
-.duration-300 {
-    transition-duration: 300ms;
-}
-
-.ease-in {
-    transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-
-.ease-out {
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-}
-
-.opacity-0 {
-    opacity: 0;
-}
-
-.opacity-100 {
-    opacity: 1;
 }

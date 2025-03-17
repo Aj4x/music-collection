@@ -1,13 +1,11 @@
+@import url('colour.css');
+
 :root {
 	font-family: sans-serif;
 	--header-height: 75px;
 	--menu-width: 200px;
 	--menu-icon-width: 50px;
 	--sidebar-transition: all 0.3s ease;
-	--bg-color: #221e1e;
-	--hover-color: #402d2d;
-	--light-text: #f0f0f0;
-	--dark-text: #292323;
 }
 
 html,
@@ -17,6 +15,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: var(--bg-color);
+	color: var(--light-text);
 }
 
 [x-cloak] {
@@ -41,8 +40,6 @@ body {
 	left: 0;
 	width: 100%;
 	height: var(--header-height);
-	color: var(--light-text);
-	background-color: var(--bg-color);
 	opacity: 0.9;
 	text-align: center;
 	z-index: 10;
@@ -58,7 +55,6 @@ body {
 .sidebar-toggle {
 	background-color: transparent;
 	border: none;
-	color: var(--light-text);
 	font-size: 24px;
 	cursor: pointer;
 	padding: 5px 10px;
@@ -67,7 +63,7 @@ body {
 }
 
 .sidebar-toggle.sidebar-open {
-	transform: rotate(90deg);
+	transform: rotate(180deg);
 	display: inline-block;
 }
 
@@ -96,7 +92,6 @@ body {
 
 .sidebar-header {
 	padding: 15px;
-	color: var(--light-text);
 	text-align: center;
 	margin: 0;
 	overflow: hidden;
@@ -125,7 +120,6 @@ body {
 	display: flex;
 	align-items: center;
 	padding: 12px 15px;
-	color: var(--light-text);
 	text-decoration: none;
 	transition: background-color 0.3s ease;
 }
@@ -173,7 +167,6 @@ body {
 
 ul.horizontal-list {
 	list-style: none;
-	color: var(--light-text);
 	display: inline-block;
 	padding: 0.5rem 0.5rem;
 }
@@ -197,7 +190,6 @@ ul.horizontal-list li {
 	margin-left: var(--menu-width);
 	transition: var(--sidebar-transition);
 	padding: 0.5em;
-	color: var(--light-text);
 }
 
 .footer.sidebar-hidden {
@@ -212,8 +204,8 @@ ul.horizontal-list li {
 	font-weight: 500;
 }
 
-.github-link:hover {
-	color: #0366d6;
+.external-link:hover {
+	color: var(--link-hover-color);
 }
 
 .github-link i {

@@ -33,7 +33,7 @@ func Page() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width\"><title>Title</title><link rel=\"stylesheet\" href=\"static/styles/styles.css\"><link rel=\"stylesheet\" href=\"static/styles/album.css\"><!-- Alpine Plugins --><script defer src=\"static/scripts/vendor/alpinejs_persist@3.x.x_dist.js\"></script><!-- Alpine JS Core --><script defer src=\"static/scripts/vendor/alpinejs@3.x.x_dist_min.js\"></script><!-- Font Awesome for icons --><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\"></head><body x-data=\"{ sidebarOpen: $persist(false) }\" x-cloak>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width\"><title>Title</title><link rel=\"stylesheet\" href=\"static/styles/styles.css\"><link rel=\"stylesheet\" href=\"static/styles/album.css\"><!-- Alpine Plugins --><script defer src=\"static/scripts/vendor/alpinejs_persist@3.x.x_dist.js\"></script><script defer src=\"static/scripts/vendor/alpinejs_focus@3.x.x_dist.js\"></script><!-- Alpine JS Core --><script defer src=\"static/scripts/vendor/alpinejs@3.x.x_dist_min.js\"></script><!-- Font Awesome for icons --><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\"></head><body x-data=\"{ sidebarOpen: $persist(false) }\" x-cloak>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -107,7 +107,7 @@ func header(name string) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 52, Col: 13}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 53, Col: 13}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -198,7 +198,7 @@ func sidebar(header string, items []menuItem) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(item.name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 77, Col: 55}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 78, Col: 55}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -233,7 +233,7 @@ func sidebar(header string, items []menuItem) templ.Component {
 			var templ_7745c5c3_Var10 string
 			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(item.name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 79, Col: 44}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/page.templ`, Line: 80, Col: 44}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
@@ -273,7 +273,7 @@ func footer() templ.Component {
 			templ_7745c5c3_Var11 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<footer class=\"footer\" :class=\"{ &#39;sidebar-hidden&#39;: !sidebarOpen }\"><div class=\"footer-content\"><p>© 2025 Aj4x <a href=\"https://github.com/Aj4x/music-collection\" class=\"github-link\" title=\"View on GitHub\" target=\"_blank\" rel=\"noopener noreferrer\"><i class=\"fab fa-github\"></i> <span>View on GitHub</span></a>. <br><br>Powered by <a href=\"https://alpinejs.dev\" target=\"_blank\" rel=\"noopener noreferrer\">Alpine.js</a> and <a href=\"https://templ.guide\" target=\"_blank\" rel=\"noopener noreferrer\">Templ</a></p></div></footer>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "<footer class=\"footer\" :class=\"{ &#39;sidebar-hidden&#39;: !sidebarOpen }\"><div class=\"footer-content\"><p>© 2025 Aj4x <a href=\"https://github.com/Aj4x/music-collection\" class=\"external-link github-link\" title=\"View on GitHub\" target=\"_blank\" rel=\"noopener noreferrer\"><i class=\"fab fa-github\"></i> <span>View on GitHub</span></a>. <br><br>Powered by <a href=\"https://alpinejs.dev\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"external-link\">Alpine.js</a> and <a href=\"https://templ.guide\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"external-link\">Templ</a></p></div></footer>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

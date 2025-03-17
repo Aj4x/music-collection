@@ -1,0 +1,13 @@
+:root {
+    --modal-color: #292323;
+    --album-color: #f0f0f0;
+    --bg-color: #221e1e;
+    --hover-color: #402d2d;
+    --link-hover-color: #0366d6;
+    --light-text: #f0f0f0;
+    --dark-text: #292323;
+}
+
+html {
+    color-scheme: light dark;
+}
