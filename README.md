@@ -1,6 +1,13 @@
 # Music Collection
 
-This project represents a **music collection application**.
+This project is a **music collection application** that allows users to manage and interact with their music library.
+
+## Features
+
+- **Album Management:** Browse and organize your music collection by albums
+- **Settings Panel:** Customize application appearance and behavior
+- **Responsive Design:** Enhanced UI for various screen sizes
+
 
 ## Prerequisites
 
@@ -12,7 +19,12 @@ Before you begin, ensure you have the following tools installed:
    ```bash
    go install github.com/go-task/task/v3/cmd/task@latest
    ```
-3. **Templ:**  
+3.**Air**
+  Live reload for Go apps
+  ```bash
+  go install github.com/air-verse/air@latest
+  ```
+4.**Templ:**  
    A Go package for safe and efficient HTML/templating.
    ```bash
    go install github.com/a-h/templ/cmd/templ@latest
@@ -52,16 +64,39 @@ To build and run the application:
 task run
 ```
 
+For live reload using Air:
+
+```bash
+task dev
+```
+
+This will run `templ generate` as well as build and execute
+the Go build output executable. This will then re-run each time
+project files are changed.
+
 This command:
 1. First executes the `build` task as a dependency
 2. Then runs the compiled binary located at `./out/music-collection`
 
 ## Project Structure
 
-The application server is built using **[Echo](https://echo.labstack.com)**, a high-performance, extensible, and minimalist Go web framework.
+- **`/views`**: Contains Templ template files for the UI components
+- **`/models`**: Data models including settings definitions
+- **`/data`**: Music collection data management
+- **`/static`**: CSS styles organized by component
+   - `/styles/styles.css`: Main application styles
+   - `/styles/album.css`: Album view styles
+   - `/styles/settings.css`: Settings panel styles
+   - `/styles/colour.css`: Color scheme definitions
 
-## Additional Notes
+## Technology Stack
 
-- The build output is placed in the `./out/` directory
-- Templ is used for HTML templating - ensure any template changes are regenerated with `templ generate` before building
-- For development purposes, you can use `task run` which handles both building and running in one command
+- **Backend**: Go with [Echo](https://echo.labstack.com) framework
+- **Frontend**: HTML/CSS with Templ templating
+- **Build System**: Taskfile for task automation
+
+## Development Notes
+
+- Modify template files in `/views` directory and run `templ generate` before building
+- CSS is organized by component for easier maintenance
+- The application uses a component-based architecture for better code organization
