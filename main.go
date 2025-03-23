@@ -22,16 +22,37 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.GET("/", func(c echo.Context) error {
-		return render(c, http.StatusOK, views.Page())
+		return render(c, http.StatusOK, views.Page("home"))
 	})
 	e.GET("/home", func(c echo.Context) error {
-		return render(c, http.StatusOK, views.HomePage())
+		return render(c, http.StatusOK, views.Page("home"))
 	})
 	e.GET("/music", func(c echo.Context) error {
-		return render(c, http.StatusOK, views.MusicPage())
+		return render(c, http.StatusOK, views.Page("music"))
+	})
+	e.GET("/list", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.Page("list"))
 	})
 	e.GET("/settings", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.Page("settings"))
+	})
+	e.GET("/account", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.Page("account"))
+	})
+	e.GET("/views/home", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.HomePage())
+	})
+	e.GET("/views/music", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.MusicPage())
+	})
+	e.GET("/views/list", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.ListPage())
+	})
+	e.GET("/views/settings", func(c echo.Context) error {
 		return render(c, http.StatusOK, views.SettingsPage(data.Settings()))
+	})
+	e.GET("/views/account", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.AccountPage())
 	})
 	staticHandler := http.FileServer(http.FS(static))
 	e.GET("/static/*", echo.WrapHandler(staticHandler))

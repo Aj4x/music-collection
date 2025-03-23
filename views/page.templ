@@ -2,7 +2,7 @@ package views
 
 import "github.com/Aj4x/music-collection/data"
 
-templ Page() {
+templ Page(view string) {
 	<!DOCTYPE html>
 	<head>
 		<meta charset="utf-8"/>
@@ -25,15 +25,28 @@ templ Page() {
 		@search()
 		<br/>
 		<main class="main" :class="{ 'sidebar-hidden': !sidebarOpen }">
-		    <section id="page-content-section">
-                @AlbumGrid(data.Albums())
+			<section id="page-content-section">
+				switch view {
+					case "home":
+						@HomePage()
+					case "music":
+						@AlbumGrid(data.Albums())
+					case "list":
+						@ListPage()
+					case "settings":
+						@SettingsPage(data.Settings())
+					case "account":
+						@AccountPage()
+					default:
+						@HomePage()
+				}
 			</section>
 			@sidebar([]menuItem{
 				{href: "/home", name: "Home", icon: "fa-home"},
 				{href: "/music", name: "Music", icon: "fa-music"},
-				{href: "#list", name: "List", icon: "fa-list"},
+				{href: "/list", name: "List", icon: "fa-list"},
 				{href: "/settings", name: "Settings", icon: "fa-cog"},
-				{href: "#account", name: "Account", icon: "fa-user"},
+				{href: "/account", name: "Account", icon: "fa-user"},
 			})
 		</main>
 		@footer()
@@ -41,7 +54,15 @@ templ Page() {
 }
 
 templ HomePage() {
-    <h2>Home Page</h2>
+	<h2>Home Page</h2>
+}
+
+templ ListPage() {
+	<h2>List Page</h2>
+}
+
+templ AccountPage() {
+	<h2>Account Page</h2>
 }
 
 templ header(name string) {
@@ -87,8 +108,14 @@ templ sidebar(items []menuItem) {
 	<aside class="sidebar" :class="{ 'collapsed': !sidebarOpen }">
 		<ul class="sidebar-menu">
 			for _, item := range items {
-				<li class="sidebar-item" >
-					<a hx-get={ item.href } title={ item.name } hx-target="#page-content-section" hx-swap="innerHTML" hx-push-url="true">
+				<li class="sidebar-item">
+					<a
+						hx-get={ "/views" + item.href }
+						title={ item.name }
+						hx-target="#page-content-section"
+						hx-swap="innerHTML"
+						hx-push-url={ item.href }
+					>
 						<i class={ "fas " + item.icon }></i>
 						<span class="sidebar-text">{ item.name }</span>
 					</a>
