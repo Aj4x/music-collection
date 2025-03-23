@@ -1,0 +1,52 @@
+package views
+
+import "github.com/Aj4x/music-collection/models"
+
+// SettingsPage renders the settings form for the application user using HTMX for asynchronous updates.
+templ SettingsPage(settings models.Settings) {
+	<div id="settings-page" class="settings-page">
+		<h1>Application Settings</h1>
+		<form hx-post="/settings/update" hx-target="#settings-page" hx-swap="outerHTML" method="post">
+			<!-- General settings section -->
+			<section class="settings-section general-settings">
+				<h2>General</h2>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" value={ settings.Username }/>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" value={ settings.Email }/>
+				</div>
+			</section>
+			<!-- Music preferences section -->
+			<section class="settings-section music-preferences">
+				<h2>Music Preferences</h2>
+				<div class="form-group">
+					<label for="default-player">Default Music Player</label>
+					<select id="default-player" name="default_player">
+						for _, player := range settings.AvailablePlayers {
+							<option value={ player } selected?={ player == settings.DefaultPlayer }>{ player }</option>
+						}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="notifications">Enable Notifications</label>
+					<input type="checkbox" id="notifications" name="notifications" checked?={ settings.Notifications }/>
+				</div>
+			</section>
+			<!-- Appearance settings section -->
+			<section class="settings-section appearance-settings">
+				<h2>Appearance</h2>
+				<div class="form-group">
+					<label for="theme">Theme</label>
+					<select id="theme" name="theme">
+						<option value="light" selected?={ settings.Theme == "light" }>Light</option>
+						<option value="dark" selected?={ settings.Theme == "dark" }>Dark</option>
+					</select>
+				</div>
+			</section>
+			<button type="submit" class="btn-save">Save Settings</button>
+		</form>
+	</div>
+}

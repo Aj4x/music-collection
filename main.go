@@ -4,6 +4,7 @@ import (
 	"context"
 	"embed"
 	"errors"
+	"github.com/Aj4x/music-collection/data"
 	"log/slog"
 	"net/http"
 
@@ -22,6 +23,15 @@ func main() {
 	e.Use(middleware.Recover())
 	e.GET("/", func(c echo.Context) error {
 		return render(c, http.StatusOK, views.Page())
+	})
+	e.GET("/home", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.HomePage())
+	})
+	e.GET("/music", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.MusicPage())
+	})
+	e.GET("/settings", func(c echo.Context) error {
+		return render(c, http.StatusOK, views.SettingsPage(data.Settings()))
 	})
 	staticHandler := http.FileServer(http.FS(static))
 	e.GET("/static/*", echo.WrapHandler(staticHandler))

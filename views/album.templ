@@ -3,7 +3,20 @@ package views
 import (
 	"fmt"
 	"github.com/Aj4x/music-collection/models"
+	"github.com/Aj4x/music-collection/data"
 )
+
+// Music page
+templ MusicPage() {
+    @AlbumGrid(data.Albums())
+    @sidebar([]menuItem{
+        {href: "#home", name: "Home", icon: "fa-home"},
+        {href: "#music", name: "Music", icon: "fa-music"},
+        {href: "#list", name: "List", icon: "fa-list"},
+        {href: "#settings", name: "Settings", icon: "fa-cog"},
+        {href: "#account", name: "Account", icon: "fa-user"},
+    })
+}
 
 // AlbumGrid displays a responsive grid of album covers
 templ AlbumGrid(albums []models.Album) {

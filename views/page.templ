@@ -10,6 +10,8 @@ templ Page() {
 		<title>Title</title>
 		<link rel="stylesheet" href="static/styles/styles.css"/>
 		<link rel="stylesheet" href="static/styles/album.css"/>
+		<!-- htmx -->
+		<script src="https://unpkg.com/htmx.org@2.0.4"></script>
 		<!-- Alpine Plugins -->
 		<script defer src="static/scripts/vendor/alpinejs_persist@3.x.x_dist.js"></script>
 		<script defer src="static/scripts/vendor/alpinejs_focus@3.x.x_dist.js"></script>
@@ -23,17 +25,23 @@ templ Page() {
 		@search()
 		<br/>
 		<main class="main" :class="{ 'sidebar-hidden': !sidebarOpen }">
-			@AlbumGrid(data.Albums())
+		    <section id="page-content-section">
+                @AlbumGrid(data.Albums())
+			</section>
 			@sidebar([]menuItem{
-				{href: "#home", name: "Home", icon: "fa-home"},
-				{href: "#music", name: "Music", icon: "fa-music"},
+				{href: "/home", name: "Home", icon: "fa-home"},
+				{href: "/music", name: "Music", icon: "fa-music"},
 				{href: "#list", name: "List", icon: "fa-list"},
-				{href: "#settings", name: "Settings", icon: "fa-cog"},
+				{href: "/settings", name: "Settings", icon: "fa-cog"},
 				{href: "#account", name: "Account", icon: "fa-user"},
 			})
 		</main>
 		@footer()
 	</body>
+}
+
+templ HomePage() {
+    <h2>Home Page</h2>
 }
 
 templ header(name string) {
@@ -45,7 +53,6 @@ templ header(name string) {
 				@click="sidebarOpen = !sidebarOpen"
 				aria-label="Toggle sidebar"
 			>
-				<!--<span :class="{ 'sidebar-open': sidebarOpen }">&#x2630;</span>-->
 				<i class="fas fa-bars"></i>
 			</button>
 			<h1>{ name }</h1>
@@ -80,8 +87,8 @@ templ sidebar(items []menuItem) {
 	<aside class="sidebar" :class="{ 'collapsed': !sidebarOpen }">
 		<ul class="sidebar-menu">
 			for _, item := range items {
-				<li class="sidebar-item">
-					<a href={ templ.URL(item.href) } title={ item.name }>
+				<li class="sidebar-item" >
+					<a hx-get={ item.href } title={ item.name } hx-target="#page-content-section" hx-swap="innerHTML" hx-push-url="true">
 						<i class={ "fas " + item.icon }></i>
 						<span class="sidebar-text">{ item.name }</span>
 					</a>
