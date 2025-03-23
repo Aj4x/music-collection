@@ -185,15 +185,10 @@ body {
 }
 
 .nav {
-	position: relative;
-	top: var(--header-height);
+	display: block;
 	left: 1em;
-	margin-left: var(--menu-width);
 	transition: var(--sidebar-transition);
-}
-
-.nav.sidebar-hidden {
-	margin-left: var(--menu-icon-width);
+	margin-left: 2em;
 }
 
 ul.horizontal-list {

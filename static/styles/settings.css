@@ -1,14 +1,12 @@
-/* styles/settings.css */
+@import url('colour.css');
 
 .settings-page {
     max-width: 800px;
-    margin: 2rem auto;
+    margin: 1rem auto;
     padding: 1.5rem;
-    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #333;
+    box-shadow: 0 2px 8px var(--hover-color);
+    color: var(--light-text);
 }
 
 .settings-page h1 {

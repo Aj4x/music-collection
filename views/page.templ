@@ -23,7 +23,6 @@ templ Page(view string) {
 	</head>
 	<body x-data="{ sidebarOpen: $persist(false), theme: $persist('light') }" :class="theme" x-cloak>
 		@header("Music Collection")
-		@search()
 		<br/>
 		<main class="main" :class="{ 'sidebar-hidden': !sidebarOpen }">
 			<section id="page-content-section">
@@ -31,7 +30,7 @@ templ Page(view string) {
 					case "home":
 						@HomePage()
 					case "music":
-						@AlbumGrid(data.Albums())
+						@MusicPage()
 					case "list":
 						@ListPage()
 					case "settings":
@@ -88,15 +87,6 @@ templ header(name string) {
 			</button>
 		</div>
 	</header>
-}
-
-templ search() {
-	<nav class="nav" :class="{ 'sidebar-hidden': !sidebarOpen }">
-		<form>
-			<input type="search" name="q" placeholder="Search query"/>
-			<input type="submit" value="Go!"/>
-		</form>
-	</nav>
 }
 
 type menuItem struct {

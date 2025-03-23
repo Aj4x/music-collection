@@ -8,14 +8,19 @@ import (
 
 // Music page
 templ MusicPage() {
-    @AlbumGrid(data.Albums())
-    @sidebar([]menuItem{
-        {href: "#home", name: "Home", icon: "fa-home"},
-        {href: "#music", name: "Music", icon: "fa-music"},
-        {href: "#list", name: "List", icon: "fa-list"},
-        {href: "#settings", name: "Settings", icon: "fa-cog"},
-        {href: "#account", name: "Account", icon: "fa-user"},
-    })
+    <div>
+        @search()
+        @AlbumGrid(data.Albums())
+    </div>
+}
+
+templ search() {
+	<nav class="nav">
+		<form>
+			<input type="search" name="q" placeholder="Search query"/>
+			<input type="submit" value="Go!"/>
+		</form>
+	</nav>
 }
 
 // AlbumGrid displays a responsive grid of album covers
