@@ -374,7 +374,7 @@ func footer() templ.Component {
 			templ_7745c5c3_Var14 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "<footer class=\"footer\" :class=\"{ &#39;sidebar-hidden&#39;: !sidebarOpen }\"><div class=\"footer-content\"><p>© 2025 Aj4x <a href=\"https://github.com/Aj4x/music-collection\" class=\"external-link github-link\" title=\"View on GitHub\" target=\"_blank\" rel=\"noopener noreferrer\"><i class=\"fab fa-github\"></i> <span>View on GitHub</span></a>. <br><br>Powered by <a href=\"https://alpinejs.dev\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"external-link\">Alpine.js</a> and <a href=\"https://templ.guide\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"external-link\">Templ</a></p></div></footer>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "<footer class=\"footer\" :class=\"{ &#39;sidebar-hidden&#39;: !sidebarOpen }\"><div class=\"footer-content\"><p>© 2025 Aj4x <a href=\"https://github.com/Aj4x/music-collection\" class=\"external-link github-link\" title=\"View on GitHub\" target=\"_blank\" rel=\"noopener noreferrer\"><i class=\"fab fa-github\"></i> <span>View on GitHub</span></a>. <br><br>Powered by <a href=\"https://alpinejs.dev\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"external-link\">Alpine.js</a>, <a href=\"https://htmx.org\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"external-link\">HTMX</a> and <a href=\"https://templ.guide\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"external-link\">Templ</a></p></div></footer>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
