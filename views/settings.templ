@@ -31,8 +31,11 @@ templ SettingsPage(settings models.Settings) {
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="notifications">Enable Notifications</label>
-					<input type="checkbox" id="notifications" name="notifications" checked?={ settings.Notifications }/>
+				    <div class="form-check">
+				        <label for="notifications">Enable Notifications</label>
+                        <input type="checkbox" id="notifications" name="notifications" checked?={ settings.Notifications }/>
+				    </div>
+
 				</div>
 			</section>
 			<!-- Appearance settings section -->

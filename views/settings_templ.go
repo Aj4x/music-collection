@@ -104,7 +104,7 @@ func SettingsPage(settings models.Settings) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</select></div><div class=\"form-group\"><label for=\"notifications\">Enable Notifications</label> <input type=\"checkbox\" id=\"notifications\" name=\"notifications\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</select></div><div class=\"form-group\"><div class=\"form-check\"><label for=\"notifications\">Enable Notifications</label> <input type=\"checkbox\" id=\"notifications\" name=\"notifications\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -114,7 +114,7 @@ func SettingsPage(settings models.Settings) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "></div></section><!-- Appearance settings section --><section class=\"settings-section appearance-settings\"><h2>Appearance</h2><div class=\"form-group\"><label for=\"theme\">Theme</label> <select id=\"theme\" name=\"theme\"><option value=\"light\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "></div></div></section><!-- Appearance settings section --><section class=\"settings-section appearance-settings\"><h2>Appearance</h2><div class=\"form-group\"><label for=\"theme\">Theme</label> <select id=\"theme\" name=\"theme\"><option value=\"light\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
